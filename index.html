@@ -7,8 +7,25 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <!-- js에 react를 넣기 위해 2가지 js code가 필요하다  react, react-dom-->
   <script>
-    const span = React.createElement("span", { id: "sexy-span" }, "hello guys");
-    ReactDOM.render(span, root);
+    const h3 = React.createElement(
+      "h3",
+      {
+        onMouseEnter: () => console.log("mouse enter"),
+      },
+      "hello guys"
+    );
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("clicked"),
+        style: {
+          color: "red",
+        },
+      },
+      "click"
+    );
+    const container = React.createElement("div", null, [h3, btn]); // element를 다 넣고 싶어서
+    ReactDOM.render(container, root);
   </script>
 </html>
 <!-- react js 작동방식은 valina js 와 반대 방식이다.
