@@ -3,32 +3,33 @@
   <body>
     <div id="root"></div>
   </body>
+  <!-- body 끝 -->
+
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <!-- js에 react를 넣기 위해 2가지 js code가 필요하다  react, react-dom-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- jsx 문법을 old one으로 변경이 필요함 babel 이용 -->
   <script type="text/babel">
     const root = document.getElementById("root");
 
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        "hello guys"
-      </h3>
-    );
+    let counter = 0;
 
-    const Button = () => (
-      <button onClick={() => console.log("clicked")} style={{ color: "red" }}>
-        click
-      </button>
-    );
-    // element 넣을 때 img 넣듯이 넣음
+    function countUp() {
+      counter += 1;
+      render();
+    }
+
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
+    // onClick에 React의 문법 넣어줌
     const Container = () => (
       <div>
-        <Title />
-        <Button />
+        <h3>Total clicks: {counter} </h3>
+        <button onClick={countUp}>Click me</button>
       </div>
     );
-    ReactDOM.render(<Container />, root);
+
+    render();
   </script>
 </html>
