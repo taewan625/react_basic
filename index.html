@@ -10,26 +10,24 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
+    function App() {
+      const [counter, setCounter] = React.useState(0); // 1st params: data, 2nd params: function which change data
+      // const counter = data[0];
+      // const modifier = data[1];
 
-    let counter = 0;
+      const onClick = () => {
+        // modifier() : 값을 update하고 rerender해주는 함수
+        // 해당 함수는 1. counter의 값을 변경하고  2. ReactDOM.render()까지 내부적으로 수행
+        setCounter(counter + 1); // useState에서 부터 받아온 값들을 onClick이라는 function에 넣어준다.
+      };
 
-    function countUp() {
-      counter += 1;
-      render();
+      return (
+        <div>
+          <h3> Total clicks: {counter} </h3>
+          <button onClick={onClick}> Click me </button>
+        </div>
+      );
     }
-
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-
-    // onClick에 React의 문법 넣어줌
-    const Container = () => (
-      <div>
-        <h3>Total clicks: {counter} </h3>
-        <button onClick={countUp}>Click me</button>
-      </div>
-    );
-
-    render();
+    ReactDOM.render(<App />, root);
   </script>
 </html>
