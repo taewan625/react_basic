@@ -9,25 +9,45 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.getElementById("root");
     function App() {
-      const [counter, setCounter] = React.useState(0); // 1st params: data, 2nd params: function which change data
-      // const counter = data[0];
-      // const modifier = data[1];
-
-      const onClick = () => {
-        // setCounter(counter + 1);
-        // 현재 state를 기반으로 계산을 할 경우, 함수를 이용한다.
-        setCounter((current) => current + 1); // 위의 문법과 동일하지만 훨씬 안전하다.
+      // 변경 조건을 내부에 작성
+      const [minutes, setMinutes] = React.useState();
+      // getDocument할 필요없이 event로부터 원하는 값을 받아온다.
+      const onChange = (event) => {
+        // console.log(event.target.value);
+        setMinutes(event.target.value);
       };
-
+      const reset = () => setMinutes(0);
+      // 변경될 동작 code
       return (
         <div>
-          <h3> Total clicks: {counter} </h3>
-          <button onClick={onClick}> Click me </button>
-        </div>
+          <h1 className="hi"> Super Converter </h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={minutes} // 변하는 state를 넣기
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange} // 변화를 감지하는 onChange
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={Math.round(minutes / 60)} // 동적으로 변경되는 부분 전체를 {}로 적용
+              id="hours "
+              placeholder="Hours"
+              type="number"
+              // 현재 hours에 Onchange라는 event가 없기 때문에 hours의 변경이 불가하다.
+              disabled
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+        </div> // return div 끝
       );
     }
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
